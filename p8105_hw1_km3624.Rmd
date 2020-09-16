@@ -50,3 +50,17 @@ as.numeric(as.factor(pull(prob1_df, sample_gt_0))) * pull(prob1_df, sample)
 ```
 
 ## Problem 2
+
+```{r load_dataset}
+data("penguins", package = "palmerpenguins")
+```
+
+In this dataset, there are 8 variables: `r names(penguins)`. The variable species contains three types: `r levels(penguins$species)`. The variable island contains 3 types: `r levels(penguins$island)`. The variable sex contains two types: `r levels(penguins$sex)`. The variable year includes: `r unique(penguins$year)`. The dataset has `r nrow(penguins)` rows and `r ncol(penguins)` columns. The mean flipper length is: `r mean(penguins$flipper_length_mm, na.rm = TRUE)`.
+
+In the following, I'm going to make a scatterplot of the variables flipper_length_mm and bill_length_mm.
+
+```{r scatterplot}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point(na.rm = TRUE)
+ggsave("penguins.pdf", height = 4, width = 6)
+```
+
