@@ -14,7 +14,7 @@ library(tidyverse)
 
 Create a data frame with the specified elements.
 
-```{r}
+```{r create_df}
 prob1_df =
   tibble(
     sample = rnorm(10),
@@ -26,7 +26,7 @@ prob1_df =
 
 Take the mean of each variable in my data frame.
 
-```{r}
+```{r mean_pull_var}
 mean(pull(prob1_df, sample))
 mean(pull(prob1_df, sample_gt_0))
 mean(pull(prob1_df, char_vec))
@@ -35,12 +35,18 @@ mean(pull(prob1_df, factor_vec))
 
 By running the code chunk above, I can take the means of the numbers and logical but not character or factor.
 
-```{r}
+```{r try_numeric, eval = FALSE}
 as.numeric(pull(prob1_df, sample))
 as.numeric(pull(prob1_df, sample_gt_0))
 as.numeric(pull(prob1_df, char_vec))
 as.numeric(pull(prob1_df, factor_vec))
 ```
+By running the code chunk that uses "as.numeric" to convert variables to numeric values, I found that a message saying "NAs introduced by coercion" was shown when converting character variables while logical and factor variables were converted to numeric successfully. This is because the "as.numeric" function does not take character variable as its argument and convert it into numeric number. This helps explain why we cannot get the mean of char_vec and factor_vec, since char_vec is not numeric, and factor_vec is also not numeric before we use the function "as.numeric" to convert.
 
+```{r try_numeric_two}
+as.numeric(pull(prob1_df, sample_gt_0)) * pull(prob1_df, sample)
+as.factor(pull(prob1_df, sample_gt_0)) * pull(prob1_df, sample)
+as.numeric(as.factor(pull(prob1_df, sample_gt_0))) * pull(prob1_df, sample)
+```
 
 ## Problem 2
