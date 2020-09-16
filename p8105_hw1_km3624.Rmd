@@ -1,7 +1,46 @@
 ---
 title: "Homework 1"
-author: Keyan Mo
+author: Phoebe Mo
 output: github_document
 ---
 
 This is my solution to HW 1 
+
+```{r}
+library(tidyverse)
+```
+
+## Problem 1
+
+Create a data frame with the specified elements.
+
+```{r}
+prob1_df =
+  tibble(
+    sample = rnorm(10),
+    sample_gt_0 = sample > 0,
+    char_vec = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+    factor_vec = factor(c("low", "low", "low", "mod", "mod", "mod", "mod", "high", "high", "high"))
+  )
+```
+
+Take the mean of each variable in my data frame.
+
+```{r}
+mean(pull(prob1_df, sample))
+mean(pull(prob1_df, sample_gt_0))
+mean(pull(prob1_df, char_vec))
+mean(pull(prob1_df, factor_vec))
+```
+
+By running the code chunk above, I can take the means of the numbers and logical but not character or factor.
+
+```{r}
+as.numeric(pull(prob1_df, sample))
+as.numeric(pull(prob1_df, sample_gt_0))
+as.numeric(pull(prob1_df, char_vec))
+as.numeric(pull(prob1_df, factor_vec))
+```
+
+
+## Problem 2
